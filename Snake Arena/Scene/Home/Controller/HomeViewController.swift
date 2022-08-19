@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var bottomButton: UIButton!
+    @IBOutlet weak var restartButton: UIButton!
     
     enum Direction: Int {
         case left
@@ -26,6 +27,8 @@ class HomeViewController: UIViewController {
     let stackWidth = 39
     let stackHeight = 40
     let stackLastElement = 1560
+    var currentPreyPosition: Int = 100
+    var speed = 0.5
     var timer: Timer?
     var turningPoint: Int = 0
     private var direction: Direction = .right
@@ -33,10 +36,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         startTimer()
+        restartButton.isHidden = true
+        genratePreyPosition()
     }
     
     func startTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: speed, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
     }
     
     func stopTimer() {
@@ -60,7 +65,6 @@ class HomeViewController: UIViewController {
         case .top:
             var currentValue = startPoint - 1
             while currentValue <= tail && currentValue >= 0 && currentValue <= stackLastElement {
-                debugPrint(currentValue)
                 collections[currentValue].backgroundColor = .black
                 currentValue = currentValue + stackWidth
             }
@@ -91,14 +95,31 @@ class HomeViewController: UIViewController {
         case .bottom:
             startPoint += stackWidth
         }
+        
         moveSnake()
+        
+        if startPoint == (currentPreyPosition + 1) {
+            self.size += 1
+            if size == 10 {
+                speed = 0.4
+            }else if size == 10 {
+                speed = 0.3
+            }else if size == 15{
+                speed = 0.2
+            }else if size == 20{
+                speed = 0.1
+            }
+            genratePreyPosition()
+        }
         guard !isBorderTouched() else { return }
         
     }
     
     func clearAll() {
-        for collection in collections {
-            collection.backgroundColor = .white
+        for collectionInfo in collections.enumerated() {
+            if collectionInfo.offset != currentPreyPosition {
+                collectionInfo.element.backgroundColor = .white
+            }
         }
     }
     
@@ -147,6 +168,12 @@ class HomeViewController: UIViewController {
             || startPoint < 0 {
             stopTimer()
             showAlert("Game Over")
+            self.topButton.isHidden = true
+            self.rightButton.isHidden = true
+            self.leftButton.isHidden = true
+            self.bottomButton.isHidden = true
+            self.restartButton.isHidden = false
+            currentPreyPosition = -1
             clearAll()
             return true
         }
@@ -154,6 +181,20 @@ class HomeViewController: UIViewController {
         return false
     }
     
+    func restart() {
+        self.startPoint = 5
+        self.size = 5
+        self.turningPoint = 0
+        self.direction = .right
+        genratePreyPosition()
+        startTimer()
+        
+    }
+    
+    func genratePreyPosition() {
+        self.currentPreyPosition = Int.random(in: 0..<stackLastElement)
+        collections[currentPreyPosition].backgroundColor = .red
+    }
 }
 
 private extension HomeViewController {
@@ -163,7 +204,7 @@ private extension HomeViewController {
         turningPoint = startPoint
         self.direction = .left
         startTimer()
-
+        
     }
     @IBAction func topButtonAction () {
         guard self.direction == .left || self.direction == .right else { return }
@@ -171,15 +212,15 @@ private extension HomeViewController {
         turningPoint = startPoint
         self.direction = .top
         startTimer()
-
-     }
+        
+    }
     @IBAction func rightButtonAction () {
         guard self.direction == .top || self.direction == .bottom else { return }
         stopTimer()
         turningPoint = startPoint
         self.direction = .right
         startTimer()
-     }
+    }
     @IBAction func bottomButtonAction () {
         guard self.direction == .left || self.direction == .right else { return }
         stopTimer()
@@ -187,4 +228,14 @@ private extension HomeViewController {
         self.direction = .bottom
         startTimer()
     }
+    @IBAction func restartButtonAction () {
+        restart()
+        self.restartButton.isHidden = true
+        self.topButton.isHidden = false
+        self.rightButton.isHidden = false
+        self.leftButton.isHidden = false
+        self.bottomButton.isHidden = false
+        
+    }
+    
 }

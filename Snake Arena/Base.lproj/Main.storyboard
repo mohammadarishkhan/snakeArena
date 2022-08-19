@@ -6755,17 +6755,44 @@
                                             <action selector="bottomButtonAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="fo3-qe-60j"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLj-Us-bL3" userLabel="RestartButton">
+                                        <rect key="frame" x="157" y="169" width="100" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="Mua-jC-6zH"/>
+                                            <constraint firstAttribute="height" constant="100" id="gI0-Ip-cN5"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.91372549530000002" green="0.25098040700000002" blue="0.14509806040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Restart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.91372549530000002" green="0.25098040700000002" blue="0.14509806040000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="50"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="restartButtonAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wcf-Kc-erf"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstItem="2Td-ew-WK8" firstAttribute="leading" secondItem="r4e-FO-DcC" secondAttribute="trailing" id="2Vo-pD-2nV"/>
                                     <constraint firstItem="iT0-DP-ngi" firstAttribute="centerX" secondItem="LPS-lE-ind" secondAttribute="centerX" id="6aT-aO-Wgx"/>
                                     <constraint firstAttribute="bottom" secondItem="iT0-DP-ngi" secondAttribute="bottom" id="D43-mc-mx2"/>
+                                    <constraint firstItem="gLj-Us-bL3" firstAttribute="centerX" secondItem="LPS-lE-ind" secondAttribute="centerX" id="EKw-si-l8D"/>
                                     <constraint firstItem="r4e-FO-DcC" firstAttribute="leading" secondItem="pgO-fI-i88" secondAttribute="trailing" id="KGt-H0-6yT"/>
                                     <constraint firstAttribute="bottom" secondItem="2Td-ew-WK8" secondAttribute="bottom" id="NHp-Zf-EYx"/>
                                     <constraint firstItem="pgO-fI-i88" firstAttribute="leading" secondItem="LPS-lE-ind" secondAttribute="leading" id="Nph-82-Gsb"/>
                                     <constraint firstItem="2Td-ew-WK8" firstAttribute="top" secondItem="LPS-lE-ind" secondAttribute="top" id="Opk-Ra-5mE"/>
                                     <constraint firstItem="r4e-FO-DcC" firstAttribute="top" secondItem="LPS-lE-ind" secondAttribute="top" id="RBb-yY-dbo"/>
+                                    <constraint firstItem="gLj-Us-bL3" firstAttribute="centerY" secondItem="LPS-lE-ind" secondAttribute="centerY" id="SFj-g2-BBC"/>
                                     <constraint firstItem="2Td-ew-WK8" firstAttribute="leading" secondItem="iT0-DP-ngi" secondAttribute="trailing" id="Z6p-l0-bpM"/>
                                     <constraint firstItem="r4e-FO-DcC" firstAttribute="centerX" secondItem="LPS-lE-ind" secondAttribute="centerX" id="ZLo-Ay-Tf1"/>
                                     <constraint firstItem="iT0-DP-ngi" firstAttribute="leading" secondItem="pgO-fI-i88" secondAttribute="trailing" id="fhG-GV-dHM"/>
@@ -6793,6 +6820,7 @@
                     <connections>
                         <outlet property="bottomButton" destination="iT0-DP-ngi" id="R04-Sc-RXd"/>
                         <outlet property="leftButton" destination="pgO-fI-i88" id="DIw-CJ-tUq"/>
+                        <outlet property="restartButton" destination="gLj-Us-bL3" id="AaG-Jk-NdU"/>
                         <outlet property="rightButton" destination="2Td-ew-WK8" id="kdc-cq-o7j"/>
                         <outlet property="topButton" destination="r4e-FO-DcC" id="Uel-TV-dwi"/>
                         <outletCollection property="collections" destination="nJf-j2-mg6" collectionClass="NSMutableArray" id="Cnb-i6-3Z0"/>
